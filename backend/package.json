@@ -2,10 +2,12 @@
   "name": "aspire-college-backend",
   "version": "1.0.0",
   "type": "module",
+  "engines": { "node": "20.x" },
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "seed": "node seed.js"
+    "seed": "node seed.js",
+    "postinstall": "npm rebuild better-sqlite3 --build-from-source"
   },
   "dependencies": {
     "better-sqlite3": "^9.4.0",
