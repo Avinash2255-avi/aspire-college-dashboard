@@ -1,0 +1,30 @@
+PRAGMA foreign_keys = ON;
+
+
+CREATE TABLE IF NOT EXISTS colleges (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT NOT NULL,
+location TEXT NOT NULL,
+course TEXT NOT NULL,
+fee INTEGER NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS reviews (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+college_id INTEGER NOT NULL,
+rating INTEGER NOT NULL CHECK(rating BETWEEN 1 AND 5),
+comment TEXT,
+created_at TEXT DEFAULT (datetime('now')),
+FOREIGN KEY(college_id) REFERENCES colleges(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS favorites (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+user_id TEXT NOT NULL,
+college_id INTEGER NOT NULL,
+created_at TEXT DEFAULT (datetime('now')),
+UNIQUE(user_id, college_id),
+FOREIGN KEY(college_id) REFERENCES colleges(id) ON DELETE CASCADE
+);
